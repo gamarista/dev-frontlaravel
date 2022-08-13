@@ -1,0 +1,17 @@
+
+    td.control-center-type-trip{
+        width:15%;
+       
+    }
+
+    td.control-center-time{
+        width:8%;
+        text-align: center
+       
+    }
+
+    td.control-center-driver{
+        width:15%;
+        text-align: center
+       
+    }

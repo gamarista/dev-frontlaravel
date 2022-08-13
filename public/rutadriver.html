@@ -1,0 +1,78 @@
+<!doctype html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SACS</title>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> 
+
+    <link  rel="icon" href="img/fav.ico" type="image/x-icon"/>   
+</head>
+<body>
+ <button class="btn btn-primary" onclick="">Ok</button>
+ <form method="POST" action="https://demo.sacsmobile.com/checklogin.php">
+     <input type="text" name="username" id="username" value="arian">
+     <input type="text" name="password" id="password" value="arian12">
+     <button type="submit" value="Save" class="btn btn-primary ">Ok</button>
+ </form>
+</body>
+<script type="text/javascript">
+    var pagoSave = function(data) {
+
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: "POST",
+            url: "https://demo.sacsmobile.com/checklogin.php",
+            data: data,
+            contentType: false,
+            processData: false,
+            cache: false,
+            complete: function(data) {
+            }
+        }).done(function(data) {
+            console.log(data);
+            listCompras(data.content);
+            $('#exito').css("display", "block");
+            $('#selected').css("display", "none");
+            $('#btnPago').css("display", "none");
+            $('#boxAlert').html('<div class="alert alert-primary animated bounce">SU PAGO SE REGISTRO CON ÉXITO</div>');
+            setTimeout(function(){ $('#boxAlert').html(''); }, 4000);
+        });
+    }    
+
+var form = new FormData();
+form.append("username", "arian");
+form.append("password", "arian12");
+
+var settings = {
+  "url": "https://demo.sacsmobile.com/checklogin.php",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Cookie": "PHPSESSID=39d2612eafb059e7842e334073a8e49e"
+  },
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+
+</script>
+
+</html>

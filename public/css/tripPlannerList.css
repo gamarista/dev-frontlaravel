@@ -1,0 +1,104 @@
+ 
+    td.trip-type-td {
+     
+        width:10px;
+        border-top: 10px solid #ffffff;
+      
+    }
+
+    td.trip-type-td.red {
+        background-color:#EF4B4B;
+    
+      
+    }
+    td.trip-type-td.green {
+        background-color:#1EC96E;
+        
+      
+    }
+
+    table.trip-appoinment-list{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #F3F2F2;
+    empty-cells: show;
+
+
+    }
+
+
+
+    td.trip-type-idmc-td{
+        width:300px;
+       
+    }
+
+    td.trip-type-pickup-td{
+        width:260px;
+       
+    }
+    td.trip-type-drooff-td{
+        width:260px;
+       
+    }
+
+    td.appoinments-td-options{
+
+        align-items: center;
+    }
+
+    .table th, .table td.tripdatatd {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 10px solid #ffffff;
+      
+    }
+
+.table td.tripoptiontd{
+    border-top: 10px solid #ffffff;
+    text-align: center;  
+
+}
+.table th, .table td {
+    padding: 0.1rem;
+
+}
+
+button.editlist {
+    width: 86px;
+}
+
+.gesidlabel {
+    visibility: hidden;
+}
+
+.requeriments {
+    margin-left: 0px;
+}
+
+select.select-driver{
+
+    font-size:1.0em;
+    border-color:#999;
+
+
+    }
+
+#selectknowaddressedit{
+    background-color: red;
+}
+
+
+
+
+@media (min-width: 768px) {
+    .modal-xl {
+      width: 90%;
+     max-width:1200px;
+    }
+  }
+
+  
+
+ 

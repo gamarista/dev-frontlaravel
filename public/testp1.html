@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Distance Matrix Service</title>
+    <style>
+      #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        width: 90%;
+      }
+      #right-panel {
+        float: right;
+        width: 48%;
+        padding-left: 2%;
+      }
+      #directions-panel {
+        margin-top: 10px;
+        background-color: #deefef;
+        padding: 10px;
+        overflow: scroll;
+        height: 400px;
+      }      
+      #output {
+        font-size: 11px;
+      }
+      img{
+        width:30%;}
+    </style>
+  </head>
+  <body>
+  	    <div id="map"></div>
+<script type="text/javascript" >
+// This example creates a simple polygon representing the Bermuda Triangle.
+// When the user clicks on the polygon an info window opens, showing
+// information about the polygon's coordinates.
+//var waypoints =[{!!$dirpat!!}];
+let map;
+let infoWindow;
+
+function initMap() {
+   var waypoints =['19700 NW 44 Ct, Opa Locka, FL, 33055','551 East 49 Street, Hialeah, FL, 330131904','2325 W 60TH St, Hialeah, FL, 33016','551 East 49 Street, Hialeah, 330131904',];
+  const myLatLng = { lat: 25.85, lng: -80.64 };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 10,
+    center: myLatLng
+  });
+
+
+//****
+  // Define the LatLng coordinates for the polygon.
+  const triangleCoords = [
+    { lat: 25.8917, lng: -80.3304 },
+    { lat: 25.9028, lng: -80.2273 },
+    { lat: 25.8029, lng: -80.2211 },
+    { lat: 25.8029, lng: -80.3304 }
+  ];
+
+
+  // Construct the polygon.
+  const bermudaTriangle = new google.maps.Polygon({
+    paths: triangleCoords,
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.8,
+    strokeWeight: 3,
+    fillColor: "#FF0000",
+    fillOpacity: 0.35
+  });
+  bermudaTriangle.setMap(map);
+  // Add a listener for the click event.
+  bermudaTriangle.addListener("click", showArrays);
+  infoWindow = new google.maps.InfoWindow();
+//****
+
+  var xDir = "19700 NW 44 Ct, Opa Locka, FL, 33055";
+for (var i = 0; i < waypoints.length; i++) {
+  var xDir = waypoints[i];
+    $.get('https://maps.googleapis.com/maps/api/geocode/json?address='+xDir+'&key=AIzaSyAJUfB3fn7ogoL-zccQPkm39pT7iOTMhBw&callback=initMap', 
+         function(data) {
+           resultados=data.results[0].geometry.location;
+           console.log(resultados);
+           new google.maps.Marker({
+              position: resultados,
+              map,
+              title: "Hello World!"
+           });
+       });
+  }
+ 
+
+ }; 
+
+
+function showArrays(event) {
+  // Since this polygon has only one path, we can call getPath() to return the
+  // MVCArray of LatLngs.
+
+  const polygon = this;
+  const vertices = polygon.getPath();
+  let contentString =
+    "<b>Bermuda Triangle polygon</b><br>" +
+    "Clicked location: <br>" +
+    event.latLng.lat() +
+    "," +
+    event.latLng.lng() +
+    "<br>";
+
+  // Iterate over the vertices.
+  for (let i = 0; i < vertices.getLength(); i++) {
+    const xy = vertices.getAt(i);
+    contentString +=
+      "<br>" + "Coordinate " + i + ":<br>" + xy.lat() + "," + xy.lng();
+  }
+  // Replace the info window's content and position.
+  infoWindow.setContent(contentString);
+  infoWindow.setPosition(event.latLng);
+  infoWindow.open(map);
+} 
+</script>  	
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJUfB3fn7ogoL-zccQPkm39pT7iOTMhBw&callback=initMap">
+    </script>  	    
+  </body>
+ </html>
