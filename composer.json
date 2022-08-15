@@ -64,5 +64,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
+        
     }
 }
+
+plesk ext composer --application -register -domain admisiongo.com -path httpdocs/
